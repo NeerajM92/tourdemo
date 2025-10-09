@@ -215,6 +215,38 @@ body {
     pointer-events: none;
 }
 
+/* Enter text box */
+.enter-text-box {
+    position: absolute;
+    top: calc(50% - 2.5cm);
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
+        0 0 2px #000;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.enter-text-box.show {
+    opacity: 1;
+}
+
+.enter-text-box.hide {
+    opacity: 0;
+}
+
 /* Small iframe container */
 .small-iframe-container {
     position: absolute;
@@ -231,28 +263,71 @@ body {
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     background: transparent;
+    border: 3px solid white;
 }
 
 .small-iframe-container::before {
+    content: 'Enter';
     position: absolute;
-    top: 50%;
+    top: -2cm;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
+    transform: translateX(-50%);
     color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 600;
     z-index: 1;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
+        0 0 2px #000;
 }
 
 .small-iframe-container.show {
+    opacity: 1 !important;
+    pointer-events: all;
+    animation: pulse 2s infinite;
+}
+
+#small-iframe-container.show {
+    opacity: 1 !important;
+}
+
+.small-iframe-container.show::before {
+    opacity: 1;
+}
+
+.small-iframe-container.static {
     opacity: 1;
     pointer-events: all;
+    animation: none;
+    border: none;
+}
+
+.small-iframe-container.static::before {
+    opacity: 0;
+}
+
+@keyframes pulse {
+    0% { 
+        transform: translate(-50%, -50%) scale(1);
+        border-color: white;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.05);
+        border-color: #ff6b6b;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1);
+        border-color: white;
+    }
 }
 
 .small-iframe-container.show:hover::before {

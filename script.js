@@ -119,23 +119,23 @@ class EstateTourApp {
     showSmallIframe() {
         const smallIframeContainer = document.getElementById('small-iframe-container');
         const smallIframe = document.getElementById('small-iframe');
+        const enterTextBox = document.getElementById('enter-text-box');
         
         if (smallIframeContainer) {
-            console.log('Showing small iframe');
             smallIframeContainer.classList.add('show');
+            smallIframeContainer.style.opacity = '1';
+            smallIframeContainer.style.pointerEvents = 'all';
+            
+            // Show enter text box
+            if (enterTextBox) {
+                enterTextBox.classList.add('show');
+                enterTextBox.classList.remove('hide');
+            }
             
             if (smallIframe) {
-                // Make iframe focusable
                 smallIframe.setAttribute('tabindex', '0');
-                
-                // Start monitoring document.activeElement
                 this.startActiveElementMonitoring();
-                
-            } else {
-                console.log('Small iframe not found!');
             }
-        } else {
-            console.log('Small iframe container not found!');
         }
     }
 
@@ -148,11 +148,10 @@ class EstateTourApp {
             if (!isMonitoring) return;
             
             const activeElement = document.activeElement;
-            console.log('Active element:', activeElement);
             
             if (activeElement === smallIframe) {
-                console.log('Iframe is now the active element - starting transition immediately');
                 isMonitoring = false; // Stop monitoring immediately
+                this.stopIframeAnimation();
                 this.startIframeTransition();
             } else {
                 // Continue monitoring
@@ -164,11 +163,38 @@ class EstateTourApp {
         checkActiveElement();
     }
 
+    // Stop iframe animation and revert to original state
+    stopIframeAnimation() {
+        const smallIframeContainer = document.getElementById('small-iframe-container');
+        const enterTextBox = document.getElementById('enter-text-box');
+        
+        if (smallIframeContainer) {
+            console.log('Stopping iframe animation and reverting to original state');
+            
+            // Remove animation and revert styling
+            smallIframeContainer.classList.remove('show');
+            smallIframeContainer.classList.add('static');
+            
+            // Remove white border
+            smallIframeContainer.style.border = 'none';
+        }
+        
+        // Hide enter text box when iframe becomes active
+        if (enterTextBox) {
+            enterTextBox.classList.add('hide');
+            enterTextBox.classList.remove('show');
+        }
+    }
+
     // Start the iframe transition sequence
     startIframeTransition() {
         console.log('Starting iframe transition sequence');
         const mapPage = document.getElementById('map-page');
         const smallIframeContainer = document.getElementById('small-iframe-container');
+        
+        console.log('Map page:', mapPage);
+        console.log('Small iframe container:', smallIframeContainer);
+        console.log('Container classes before expand:', smallIframeContainer ? smallIframeContainer.className : 'not found');
         
         // Step 1: Wait 0.3 seconds after iframe is detected as active
         setTimeout(() => {
@@ -189,6 +215,16 @@ class EstateTourApp {
                 if (smallIframeContainer) {
                     smallIframeContainer.classList.add('expand');
                     console.log('Iframe expanding to full screen');
+                    console.log('Container classes after expand:', smallIframeContainer.className);
+                    
+                    // Force style application
+                    smallIframeContainer.style.width = '100vw';
+                    smallIframeContainer.style.height = '100vh';
+                    smallIframeContainer.style.top = '0';
+                    smallIframeContainer.style.left = '0';
+                    smallIframeContainer.style.transform = 'none';
+                    smallIframeContainer.style.borderRadius = '0';
+                    smallIframeContainer.style.zIndex = '1000';
                 }
                 
                 // Unblur the page
@@ -267,11 +303,12 @@ class EstateTourApp {
         }
     }
 
-    // Hide expanded iframe and return to map
+    // Hide expanded iframe and return to property selection screen
     hideExpandedIframe() {
         const smallIframeContainer = document.getElementById('small-iframe-container');
         const mapPage = document.getElementById('map-page');
         const topBar = document.getElementById('iframe-top-bar');
+        const mapOverlay = document.querySelector('.map-overlay');
         
         if (topBar) {
             topBar.style.transition = 'all 0.3s ease-out';
@@ -295,7 +332,131 @@ class EstateTourApp {
             // Hide small iframe after animation
             setTimeout(() => {
                 smallIframeContainer.classList.remove('show');
+                smallIframeContainer.style.opacity = '0';
+                
+                // Reset iframe state completely
+                this.resetIframeState();
+                
+                // Reset map to property selection state
+                this.resetMapToPropertySelection();
             }, 800);
+        }
+    }
+
+    // Reset iframe state completely by recreating it
+    resetIframeState() {
+        const smallIframeContainer = document.getElementById('small-iframe-container');
+        const enterTextBox = document.getElementById('enter-text-box');
+        
+        if (smallIframeContainer) {
+            // Remove all classes
+            smallIframeContainer.classList.remove('show', 'static', 'expand');
+            
+            // Reset styles to exact initial state
+            smallIframeContainer.style.opacity = '0';
+            smallIframeContainer.style.border = '3px solid white';
+            smallIframeContainer.style.pointerEvents = 'none';
+            smallIframeContainer.style.transform = 'translate(-50%, -50%)';
+            smallIframeContainer.style.width = '2cm';
+            smallIframeContainer.style.height = '2cm';
+            smallIframeContainer.style.position = 'absolute';
+            smallIframeContainer.style.top = '50%';
+            smallIframeContainer.style.left = '50%';
+            smallIframeContainer.style.zIndex = '1000';
+            smallIframeContainer.style.borderRadius = '8px';
+            smallIframeContainer.style.overflow = 'hidden';
+            smallIframeContainer.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+            smallIframeContainer.style.background = 'transparent';
+            smallIframeContainer.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            // Hide enter text box
+            if (enterTextBox) {
+                enterTextBox.classList.add('hide');
+                enterTextBox.classList.remove('show');
+            }
+            
+            // Delete and recreate the iframe for complete reset
+            const oldIframe = document.getElementById('small-iframe');
+            if (oldIframe) {
+                oldIframe.remove();
+            }
+            
+            // Create new iframe with exact initial properties
+            const newIframe = document.createElement('iframe');
+            newIframe.id = 'small-iframe';
+            newIframe.src = 'https://my.matterport.com/show/?m=LsnvPeo6s1U&brand=0';
+            newIframe.frameborder = '0';
+            newIframe.allowfullscreen = true;
+            newIframe.allow = 'autoplay; fullscreen; web-share; xr-spatial-tracking;';
+            
+            // Append new iframe to container
+            smallIframeContainer.appendChild(newIframe);
+        }
+    }
+
+    // Reset map to property selection state
+    resetMapToPropertySelection() {
+        const map = document.getElementById('map');
+        const mapOverlay = document.querySelector('.map-overlay');
+        
+        // Re-enable map interactions
+        if (map) {
+            try {
+                map.draggable = true;
+                map.scrollwheel = true;
+                map.disableDoubleClickZoom = false;
+                map.disableKeyboardShortcuts = false;
+                map.style.pointerEvents = 'auto';
+            } catch (error) {
+                // Ignore errors
+            }
+        }
+        
+        // Reset map camera to earth view
+        if (map && map.flyCameraTo) {
+            try {
+                map.flyCameraTo({
+                    endCamera: {
+                        center: { lat: 30.0, lng: 0.0, altitude: 20000000 },
+                        tilt: 0,
+                        range: 15000,
+                        heading: 0
+                    },
+                    durationMillis: 3000
+                });
+            } catch (error) {
+                // If flyCameraTo fails, try setting properties directly
+                try {
+                    map.center = { lat: 30.0, lng: 0.0,altitude: 20000000};
+                    map.tilt = 0;
+                    map.range = 15000;
+                    map.heading = 0;
+                } catch (e) {
+                    // Ignore errors
+                }
+            }
+        }
+        
+        // Show map overlay with property selection
+        if (mapOverlay) {
+            mapOverlay.classList.remove('fade-out');
+            mapOverlay.style.opacity = '1';
+            mapOverlay.style.pointerEvents = 'auto';
+            mapOverlay.style.background = 'rgba(0, 0, 0, 0.3)';
+            
+            // Ensure button is clickable after a short delay
+            setTimeout(() => {
+                const exploreButton = document.getElementById('explore-property-btn');
+                if (exploreButton) {
+                    exploreButton.style.pointerEvents = 'auto';
+                    exploreButton.style.cursor = 'pointer';
+                }
+            }, 100);
+        }
+        
+        // Blur the map background
+        if (map) {
+            map.classList.add('blurred');
         }
     }
 
@@ -444,7 +605,7 @@ class EstateTourApp {
     attemptCameraFlight(map, propertyId, retryCount = 0) {
         if (map.flyCameraTo && typeof map.flyCameraTo === 'function') {
             const propertyLocation = this.getPropertyLocation(propertyId);
-            
+           
             try {
                 // Fly camera to property
                 map.flyCameraTo({
@@ -455,6 +616,7 @@ class EstateTourApp {
                 // Show small iframe after camera animation instead of navigating
                 setTimeout(() => {
                     console.log('About to show small iframe');
+                    this.fixMapAfterFlyAnimation(map);
                     this.showSmallIframe();
                 }, 5500);
             } catch (error) {
@@ -483,22 +645,73 @@ class EstateTourApp {
         
         if (mapOverlay) {
             mapOverlay.classList.add('fade-out');
+            // Ensure overlay is completely hidden
+            setTimeout(() => {
+                mapOverlay.style.opacity = '0';
+                mapOverlay.style.pointerEvents = 'none';
+            }, 500);
+        }
+    }
+
+    // Fix map after fly animation - disable drag and scroll
+    fixMapAfterFlyAnimation(map) {
+        try {
+            map.draggable = false;
+            map.scrollwheel = false;
+            map.disableDoubleClickZoom = true;
+            map.disableKeyboardShortcuts = true;
+            
+            try {
+                map.disableDefaultUI = true;
+            } catch (e) {
+                // Ignore if not supported
+            }
+            
+            try {
+                map.zoomControl = false;
+            } catch (e) {
+                // Ignore if not supported
+            }
+            
+            try {
+                map.mapTypeControl = false;
+                map.streetViewControl = false;
+                map.fullscreenControl = false;
+            } catch (e) {
+                // Ignore if not supported
+            }
+            
+            try {
+                map.style.pointerEvents = 'none';
+            } catch (e) {
+                // Ignore if not supported
+            }
+        } catch (error) {
+            // Ignore errors
         }
     }
 
     // Property locations for flyCameraTo
     getPropertyLocation(propertyId) {
+        
+        let rangec = 1000;
+        let latc = 40.70258430593181;
+        let lngc = -74.01364283499413;
+       
         const properties = {
             'property-1': {
-                center: { lat: 40.7128, lng: -74.0060, altitude: 10 },
+                // center: { lat: 40.7128, lng: -74.0060, altitude: 10 },
+                center: { lat: latc, lng: lngc, altitude: 0 }, 
                 tilt: 70,
-                range: 1000,
+                range: 100,
                 heading: 0
             }
             // Add more properties as needed
         };
         return properties[propertyId] || properties['property-1'];
     }
+
+   
 }
 
 
