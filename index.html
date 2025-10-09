@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estate Tour Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Welcome Page -->
+        <div id="welcome-page" class="page active">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h1 class="welcome-title">Welcome to Estate Tour</h1>
+                    <p class="welcome-subtitle">Experience properties like never before with our immersive 3D tours</p>
+                    <p class="welcome-description">
+                        Discover stunning properties through cutting-edge 3D technology. 
+                        Navigate through virtual spaces with smooth animations and 
+                        explore every detail from the comfort of your device.
+                    </p>
+                </div>
+                <button id="start-tour-btn" class="start-tour-button">
+                    <span class="button-text">Start Tour Demo</span>
+                    <div class="button-arrow">→</div>
+                </button>
+            </div>
+            <div class="welcome-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map View Page -->
+        <div id="map-page" class="page">
+            <div class="map-container">
+                <div class="map-overlay">
+                    <div class="map-content">
+                        <h2 class="map-title">Select Your Property</h2>
+                        <p class="map-subtitle">Choose from our available properties to begin your virtual tour</p>
+                        <button id="explore-property-btn" class="explore-button">
+                            <span class="button-text">Explore Property-1</span>
+                            <div class="button-icon">🏠</div>
+                        </button>
+                    </div>
+                </div>
+                <gmp-map-3d id="map" mode="SATELLITE" default-ui-disabled class="google-map"></gmp-map-3d>
+                <div id="small-iframe-container" class="small-iframe-container">
+                    <iframe 
+                        id="small-iframe"
+                        src="https://my.matterport.com/show/?m=LsnvPeo6s1U&brand=0" 
+                        frameborder="0" 
+                        allowfullscreen 
+                        allow="autoplay; fullscreen; web-share; xr-spatial-tracking;">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tour Demo Page (for future iframe integration) -->
+        <div id="tour-page" class="page">
+            <div class="tour-container">
+                <div class="tour-header">
+                    <button id="back-to-map-btn" class="back-button">
+                        <span class="back-arrow">←</span>
+                        Back to Map
+                    </button>
+                    <h3 class="tour-title">Property Tour Demo</h3>
+                </div>
+                <div class="iframe-container">
+                    <iframe 
+                        id="matterport-iframe"
+                        width="853" 
+                        height="480" 
+                        src="https://my.matterport.com/show/?m=LsnvPeo6s1U&brand=0" 
+                        frameborder="0" 
+                        allowfullscreen 
+                        allow="autoplay; fullscreen; web-share; xr-spatial-tracking;"
+                        style="opacity: 0; transition: opacity 0.5s ease-in-out;">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Google Maps 3D initialization function - must be defined before API loads
+        async function initMap() {
+            try {
+                const { Map3DElement } = await google.maps.importLibrary("maps3d");
+                const map = document.getElementById("map");
+
+                if (!map) {
+                    console.error('Map element not found during initialization');
+                    return;
+                }
+
+                // Set initial camera position (earth view)
+                map.center = { lat: 30.0, lng: 0.0, altitude: 20000000 };
+                map.tilt = 0;
+                map.range = 15000;
+                map.heading = 0;
+
+                console.log('Google Maps 3D initialized successfully');
+            } catch (error) {
+                console.error('Error initializing Google Maps 3D:', error);
+            }
+        }
+
+        // Make initMap globally available
+        window.initMap = initMap;
+    </script>
+    <script src="script.js?v=2"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2ini1hXEtSi1tmDrJVQdg4dAICLGO3ZU&v=alpha&libraries=maps3d&callback=initMap"></script>
+</body>
+</html>
