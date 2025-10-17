@@ -3,90 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estate Tour Demo</title>
+    <title>Golden Dragon Palace - Luxury Chinese Cuisine</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐉</text></svg>">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Welcome Page -->
-        <div id="welcome-page" class="page active">
-            <div class="welcome-content">
-                <div class="welcome-text">
-                    <h1 class="welcome-title">Welcome to Estate Tour</h1>
-                    <p class="welcome-subtitle">Experience properties like never before with our immersive 3D tours</p>
-                    <p class="welcome-description">
-                        Discover stunning properties through cutting-edge 3D technology. 
-                        Navigate through virtual spaces with smooth animations and 
-                        explore every detail from the comfort of your device.
-                    </p>
-                </div>
-                <button id="start-tour-btn" class="start-tour-button">
-                    <span class="button-text">Start Tour Demo</span>
-                    <div class="button-arrow">→</div>
-                </button>
+    <!-- Integrated Navigation -->
+    <nav class="integrated-navigation">
+        <!-- Left Side Navigation -->
+        <div class="nav-left-vertical">
+            <div class="social-icons">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="welcome-background">
-                <div class="floating-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
-                    <div class="shape shape-3"></div>
-                </div>
+            <div class="vertical-nav">
+                <a href="#home" class="nav-link-vertical active">Home</a>
+                <a href="#about" class="nav-link-vertical">About</a>
+                <a href="#menu" class="nav-link-vertical">Menu</a>
+                <a href="#contact" class="nav-link-vertical">Contact</a>
+            </div>
+            <div class="book-now-text">
+                <span>Book Now</span>
             </div>
         </div>
 
-        <!-- Map View Page -->
-        <div id="map-page" class="page">
-            <div class="map-container">
-                <div class="map-overlay">
-                    <div class="map-content">
-                        <h2 class="map-title">Select Your Property</h2>
-                        <p class="map-subtitle">Choose from our available properties to begin your virtual tour</p>
-                        <button id="explore-property-btn" class="explore-button">
-                            <span class="button-text">Explore Property-1</span>
-                            <div class="button-icon">🏠</div>
+        <!-- Center Logo -->
+        <div class="center-logo">
+            <span class="logo-main">Golden Dragon Palace</span>
+            <span class="logo-sub">Luxury Chinese Cuisine</span>
+        </div>
+
+        <!-- Right Side Elements -->
+        <div class="nav-right-vertical">
+            <div class="order-now-vertical">
+                <span>Order Now</span>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="carousel-indicators-vertical">
+            <span class="indicator active" onclick="currentSlide(1)"></span>
+            <span class="indicator" onclick="currentSlide(2)"></span>
+            <span class="indicator" onclick="currentSlide(3)"></span>
+            <span class="indicator" onclick="currentSlide(4)"></span>
+        </div>
+
+        <!-- Page Counter -->
+        <div class="page-counter">
+            <span class="current-page">1</span>
+            <span class="total-pages">/ 4</span>
+            <i class="fas fa-pause"></i>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <div class="nav-arrows">
+            <button class="nav-arrow prev" onclick="changeSlide(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-arrow next" onclick="changeSlide(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section active">
+            <div class="hero-carousel">
+                <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">Golden Dragon</span>
+                        <span class="title-line">Palace</span>
+                    </h1>
+                    <p class="hero-subtitle">Experience the finest Chinese cuisine in an atmosphere of unparalleled luxury</p>
+                    <div class="hero-buttons">
+                        <button id="explore-restaurant-btn" class="cta-button">
+                            <span class="button-text">Explore Our Restaurant</span>
+                            <div class="button-icon">🏮</div>
+                        </button>
+                        <button class="cta-button secondary">
+                            <span class="button-text">View Menu</span>
+                            <div class="button-icon">📋</div>
                         </button>
                     </div>
                 </div>
-                <gmp-map-3d id="map" mode="SATELLITE" default-ui-disabled class="google-map"></gmp-map-3d>
-                <div id="small-iframe-container" class="small-iframe-container">
-                    <iframe 
-                        id="small-iframe"
-                        src="https://my.matterport.com/show/?m=LsnvPeo6s1U&brand=0" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        allow="autoplay; fullscreen; web-share; xr-spatial-tracking;">
-                    </iframe>
-                </div>
-                <div id="enter-text-box" class="enter-text-box">
-                    Enter
+            </div>
+            
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="section-container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title">Our Story</h2>
+                        <p class="about-description">
+                            For over three decades, Golden Dragon Palace has been the pinnacle of Chinese culinary excellence. 
+                            Our master chefs, trained in the ancient traditions of Imperial Chinese cuisine, create dishes 
+                            that honor both heritage and innovation.
+                        </p>
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-award"></i>
+                                <h3>Michelin Starred</h3>
+                                <p>Recognized for culinary excellence</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-utensils"></i>
+                                <h3>Master Chefs</h3>
+                                <p>30+ years of experience</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-leaf"></i>
+                                <h3>Fresh Ingredients</h3>
+                                <p>Sourced daily from local markets</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Restaurant Interior">
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Tour Demo Page (for future iframe integration) -->
-        <div id="tour-page" class="page">
+        <!-- Menu Section -->
+        <section id="menu" class="menu-section">
+            <div class="section-container">
+                <h2 class="section-title">Our Signature Dishes</h2>
+                <div class="menu-carousel">
+                    <div class="menu-item active">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Peking Duck">
+                        <div class="menu-content">
+                            <h3>Peking Duck</h3>
+                            <p>Traditional Beijing-style roasted duck with crispy skin and tender meat</p>
+                            <span class="price">$89</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dim Sum">
+                        <div class="menu-content">
+                            <h3>Dim Sum Collection</h3>
+                            <p>Handcrafted dumplings and steamed buns with premium fillings</p>
+                            <span class="price">$45</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Hot Pot">
+                        <div class="menu-content">
+                            <h3>Imperial Hot Pot</h3>
+                            <p>Premium ingredients in our signature bone broth</p>
+                            <span class="price">$65</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kung Pao Chicken">
+                        <div class="menu-content">
+                            <h3>Kung Pao Chicken</h3>
+                            <p>Spicy stir-fried chicken with peanuts and vegetables</p>
+                            <span class="price">$32</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sweet and Sour Pork">
+                        <div class="menu-content">
+                            <h3>Sweet and Sour Pork</h3>
+                            <p>Classic Chinese dish with crispy pork and tangy sauce</p>
+                            <span class="price">$28</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mapo Tofu">
+                        <div class="menu-content">
+                            <h3>Mapo Tofu</h3>
+                            <p>Spicy Sichuan tofu with ground pork and fermented beans</p>
+                            <span class="price">$24</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-controls">
+                    <button class="menu-btn prev" onclick="changeMenuSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="menu-btn next" onclick="changeMenuSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Virtual Tour Section -->
+        <section id="virtual-tour" class="virtual-tour-section">
             <div class="tour-container">
                 <div class="tour-header">
-                    <button id="back-to-map-btn" class="back-button">
-                        <span class="back-arrow">←</span>
-                        Back to Map
-                    </button>
-                    <h3 class="tour-title">Property Tour Demo</h3>
+                    <h2 class="section-title">Explore Our Restaurant</h2>
+                    <p class="tour-subtitle">Take a virtual journey through our luxurious dining spaces</p>
                 </div>
-                <div class="iframe-container">
-                    <iframe 
-                        id="matterport-iframe"
-                        width="853" 
-                        height="480" 
-                        src="https://my.matterport.com/show/?m=LsnvPeo6s1U&brand=0" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        allow="autoplay; fullscreen; web-share; xr-spatial-tracking;"
-                        style="opacity: 0; transition: opacity 0.5s ease-in-out;">
-                    </iframe>
+                
+                <div class="map-container">
+                    <div class="map-overlay">
+                        <div class="map-content">
+                            <h3 class="map-title">Select Your Dining Experience</h3>
+                            <p class="map-subtitle">Choose from our exquisite dining areas to begin your culinary journey</p>
+                            <button id="explore-property-btn" class="explore-button">
+                                <span class="button-text">Explore Main Dining Hall</span>
+                                <div class="button-icon">🏮</div>
+                            </button>
+                        </div>
+                    </div>
+                    <gmp-map-3d id="map" mode="SATELLITE" default-ui-disabled class="google-map"></gmp-map-3d>
+                    <div id="restaurant-photo-overlay" class="restaurant-photo-overlay">
+                        <img src="restaurant front.png" alt="Golden Dragon Palace Restaurant Front Gate" />
+                    </div>
+                    <div id="small-iframe-container" class="small-iframe-container">
+                        <iframe 
+                            id="small-iframe"
+                            src="https://my.matterport.com/show/?m=LsnvPeo6s1U&brand=0" 
+                            frameborder="0" 
+                            allowfullscreen 
+                            allow="autoplay; fullscreen; web-share; xr-spatial-tracking;">
+                        </iframe>
+                    </div>
+                    <div id="enter-text-box" class="enter-text-box">
+                        Enter
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="section-container">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3>Location</h3>
+                                <p>123 Dragon Street<br>Beijing, China 100000</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>+86 10 1234 5678</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>info@goldendragonpalace.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3>Hours</h3>
+                                <p>Mon-Sun: 11:00 AM - 11:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form>
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                            <input type="tel" placeholder="Phone Number">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support" class="support-section">
+            <div class="section-container">
+                <h2 class="section-title">Customer Support</h2>
+                <div class="support-content">
+                    <div class="support-item">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Our dedicated team is always here to help</p>
+                    </div>
+                    <div class="support-item">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Secure Payment</h3>
+                        <p>Your transactions are safe and encrypted</p>
+                    </div>
+                    <div class="support-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h3>Fast Delivery</h3>
+                        <p>Quick and reliable delivery service</p>
+                    </div>
+                    <div class="support-item">
+                        <i class="fas fa-undo"></i>
+                        <h3>Easy Returns</h3>
+                        <p>Hassle-free return policy</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Virtual Tour Modal -->
+    <div id="tour-modal" class="tour-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close-tour-btn" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3 class="modal-title">Golden Dragon Palace Virtual Tour</h3>
+            </div>
+            <div class="modal-body">
+                <iframe 
+                    id="matterport-iframe"
+                    width="100%" 
+                    height="100%" 
+                    src="https://my.matterport.com/show/?m=LsnvPeo6s1U&brand=0" 
+                    frameborder="0" 
+                    allowfullscreen 
+                    allow="autoplay; fullscreen; web-share; xr-spatial-tracking;">
+                </iframe>
             </div>
         </div>
     </div>
@@ -110,6 +371,24 @@
                 map.heading = 0;
 
                 console.log('Google Maps 3D initialized successfully');
+                
+                // Wait a bit for the restaurant website to be ready
+                setTimeout(() => {
+                    // Trigger map pre-loading in our restaurant website
+                    if (window.restaurantWebsite && window.restaurantWebsite.initializeMapOnLoad) {
+                        console.log('Triggering map pre-loading...');
+                        window.restaurantWebsite.initializeMapOnLoad();
+                    } else {
+                        console.log('Restaurant website not ready yet, will retry...');
+                        // Retry after a short delay
+                        setTimeout(() => {
+                            if (window.restaurantWebsite && window.restaurantWebsite.initializeMapOnLoad) {
+                                console.log('Retrying map pre-loading...');
+                                window.restaurantWebsite.initializeMapOnLoad();
+                            }
+                        }, 1000);
+                    }
+                }, 500);
             } catch (error) {
                 console.error('Error initializing Google Maps 3D:', error);
             }
@@ -118,7 +397,7 @@
         // Make initMap globally available
         window.initMap = initMap;
     </script>
-    <script src="script.js?v=16"></script>
+    <script src="script.js?v=31"></script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2ini1hXEtSi1tmDrJVQdg4dAICLGO3ZU&v=alpha&libraries=maps3d&callback=initMap"></script>
 </body>
 </html>
