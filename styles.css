@@ -104,10 +104,10 @@ body.fullscreen-mode {
     right: 20px;
     width: auto;
     height: auto;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    padding: 10px 15px;
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 0;
+    padding: 0;
     z-index: 10001;
 }
 
@@ -115,6 +115,8 @@ body.fullscreen-mode {
     padding: 0;
     margin: 0;
     max-width: none;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .fullscreen-mode .map-container .nav-left {
@@ -122,8 +124,14 @@ body.fullscreen-mode {
 }
 
 .fullscreen-mode .map-container .exit-btn {
-    padding: 8px 16px;
-    font-size: 12px;
+    padding: 10px 20px;
+    font-size: 14px;
+    background: linear-gradient(45deg, #d4af37, #f4d03f) !important;
+    color: #000 !important;
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Reset and Base Styles */
