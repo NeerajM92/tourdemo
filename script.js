@@ -190,6 +190,9 @@ class RestaurantWebsite {
         try {
             console.log('Starting virtual tour...');
             
+            // Enter fullscreen mode
+            this.enterFullscreenMode();
+            
             // Check if map is already initialized
             if (!this.isMapInitialized) {
                 console.log('Map not pre-loaded, initializing now...');
@@ -230,6 +233,74 @@ class RestaurantWebsite {
         } catch (error) {
             console.error('Error starting virtual tour:', error);
         }
+    }
+
+    enterFullscreenMode() {
+        // Add fullscreen class to body
+        document.body.classList.add('fullscreen-mode');
+        
+        // Show fullscreen navigation
+        const fullscreenNav = document.getElementById('fullscreen-nav');
+        if (fullscreenNav) {
+            fullscreenNav.classList.add('show');
+        }
+        
+        // Setup exit button event listener
+        this.setupExitButton();
+        
+        console.log('Entered fullscreen mode');
+    }
+
+    exitFullscreenMode() {
+        // Remove fullscreen class from body
+        document.body.classList.remove('fullscreen-mode');
+        
+        // Hide fullscreen navigation
+        const fullscreenNav = document.getElementById('fullscreen-nav');
+        if (fullscreenNav) {
+            fullscreenNav.classList.remove('show');
+        }
+        
+        // Reset everything to initial state
+        this.resetEverythingToInitialState();
+        
+        console.log('Exited fullscreen mode');
+    }
+
+    setupExitButton() {
+        const exitBtn = document.getElementById('exit-tour-btn');
+        if (exitBtn) {
+            // Remove any existing event listeners
+            exitBtn.removeEventListener('click', this.handleExitTour);
+            
+            // Add new event listener
+            this.handleExitTour = () => {
+                this.exitFullscreenMode();
+            };
+            exitBtn.addEventListener('click', this.handleExitTour);
+        }
+    }
+
+    resetEverythingToInitialState() {
+        // Reset map
+        this.resetMapToPropertySelection();
+        
+        // Reset iframe state
+        this.resetIframeState();
+        
+        // Reset restaurant photo overlay
+        const restaurantPhotoOverlay = document.getElementById('restaurant-photo-overlay');
+        if (restaurantPhotoOverlay) {
+            restaurantPhotoOverlay.classList.remove('show');
+        }
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Reload the page after a short delay to ensure clean state
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
     }
 
     showRestaurantPhoto() {
@@ -557,11 +628,8 @@ class RestaurantWebsite {
             tourModal.classList.remove('active');
         }
         
-        // Reset iframe state
-        this.resetIframeState();
-        
-        // Reset map
-        this.resetMapToPropertySelection();
+        // Exit fullscreen mode
+        this.exitFullscreenMode();
     }
 
     resetIframeState() {

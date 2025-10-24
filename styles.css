@@ -1,3 +1,131 @@
+/* Full Screen Virtual Tour Navigation */
+.fullscreen-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fullscreen-nav.show {
+    display: block;
+    opacity: 1;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-left .nav-title {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.exit-btn {
+    background: linear-gradient(45deg, #d4af37, #f4d03f);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.exit-btn:hover {
+    background: linear-gradient(45deg, #f4d03f, #d4af37);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.exit-btn i {
+    font-size: 16px;
+}
+
+/* Full Screen Mode Styles */
+body.fullscreen-mode {
+    overflow: hidden;
+}
+
+.fullscreen-mode .integrated-navigation,
+.fullscreen-mode .main-content > section:not(#virtual-tour) {
+    display: none;
+}
+
+.fullscreen-mode #virtual-tour {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: #000;
+    padding: 0;
+}
+
+.fullscreen-mode .tour-container {
+    height: 100%;
+    padding: 0;
+}
+
+.fullscreen-mode .map-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 9998;
+}
+
+.fullscreen-mode .map-container .fullscreen-nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    height: auto;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 10px 15px;
+    z-index: 10001;
+}
+
+.fullscreen-mode .map-container .nav-content {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+}
+
+.fullscreen-mode .map-container .nav-left {
+    display: none;
+}
+
+.fullscreen-mode .map-container .exit-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
